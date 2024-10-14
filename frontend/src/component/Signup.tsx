@@ -34,12 +34,16 @@ const Signup = () => {
         user_type: Yup.string().required('User type is required'),
         gender: Yup.string().required("Gender is required"),
         profile_photo: Yup.mixed().required("Photo is necessary"),
-        // resume: Yup.mixed().when('user_type', {
-        //     is:2, then: Yup.mixed().required("Resume is required")
-        // }),
-        // agency: Yup.mixed().when('user_type', {
-        //     is:2, then: Yup.mixed().required("Resume is required")
-        // }),
+        resume: Yup.mixed().when('user_type', (user_type:any, schema) => {
+            if(user_type == 2)
+              return schema.required("Resume is required")
+            return schema}
+        ),
+        agency: Yup.string().when('user_type', (user_type:any, schema) => {
+            if(user_type == 2)
+              return schema.required("Agency is required")
+            return schema}
+        ),
         
     });
 
@@ -107,6 +111,7 @@ const Signup = () => {
                             <label>
                                 <Field name="gender" type="radio" value="3" /> Others
                             </label>
+                        <ErrorMessage name="gender" component="div" className="text-danger" />
                         </div>
                     </div>
                     <div className="mb-3">
@@ -115,8 +120,9 @@ const Signup = () => {
                             <option value="1">Agency</option>
                             <option value="2">Job-seeker</option>
                         </Field>
+                        <ErrorMessage name="user_type" component="div" className="text-danger" />
                     </div>
-                    {values.user_type === '2' && (
+                    {values.user_type === '1' && (
                         <>
                             <div className="mb-3">
                                 <input
@@ -128,6 +134,7 @@ const Signup = () => {
                                     }}
                                     className="form-control"
                                 />
+                                    <ErrorMessage name="resume" component="div" className="text-danger" />
                             </div>
                             <div className="mb-3">
                                 <Field as="select" name="agency" className="form-select">
@@ -138,6 +145,7 @@ const Signup = () => {
                                         </option>
                                     ))}
                                 </Field>
+                                    <ErrorMessage name="agency" component="div" className="text-danger" />
                             </div>
                         </>
                     )}
