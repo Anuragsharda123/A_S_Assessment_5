@@ -4,8 +4,10 @@ import bcrypy from 'bcrypt';
 import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken'
 import Hobby from "../model/userHobby";
+import { Local } from "../environment/config";
 
-const secret: string = "Anurag123#@!";
+const secret = Local.Secret_Key;
+
 
 // post request
 export const addUser = async(req:any, res:Response) => {

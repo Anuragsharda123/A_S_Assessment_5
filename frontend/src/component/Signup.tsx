@@ -34,11 +34,11 @@ const Signup = () => {
         user_type: Yup.string().required('User type is required'),
         gender: Yup.string().required("Gender is required"),
         profile_photo: Yup.mixed().required("Photo is necessary"),
-        resume: Yup.mixed().when('user_type', (user_type:any, schema) => {
-            if(user_type == 2)
-              return schema.required("Resume is required")
-            return schema}
-        ),
+        // resume: Yup.mixed().when('user_type', (user_type:any, schema) => {
+        //     if(user_type == 2)
+        //       return schema.required("Resume is required")
+        //     return schema}
+        // ),
         agency: Yup.string().when('user_type', (user_type:any, schema) => {
             if(user_type == 2)
               return schema.required("Agency is required")
@@ -122,7 +122,7 @@ const Signup = () => {
                         </Field>
                         <ErrorMessage name="user_type" component="div" className="text-danger" />
                     </div>
-                    {values.user_type === '1' && (
+                    {values.user_type === '2' && (
                         <>
                             <div className="mb-3">
                                 <input

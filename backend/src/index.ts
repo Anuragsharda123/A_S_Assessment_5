@@ -2,12 +2,11 @@ import express from 'express';
 import cors from 'cors'
 import router from './route/userRouter';
 import sequelize from './config/db';
-import dotenv from 'dotenv'
-
-dotenv.config();
+import { Local } from './environment/config';
 
 const app = express();
-const PORT = process.env.PORT|| 4000;
+
+const PORT = Local.Port;
 
 app.use('/resume', express.static('resume'));
 app.use(express.json());

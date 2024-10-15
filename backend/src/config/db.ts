@@ -1,10 +1,11 @@
 import { Sequelize } from "sequelize";
+import { Local } from "../environment/config";
 
-const DB:any = process.env.DB_NAME || "new_assessment_5"
-const USER:any = process.env.DB_USER || "root"
-const PASS:any = process.env.DB_PASSWORD || "123456"
-const HOST:any = process.env.DB_HOST || "localhost"
-const DIA:any = process.env.DB_DIALECT || 'mysql'
+const DB:any = Local.DB_Name
+const USER:any = Local.DB_User
+const PASS:any = Local.DB_Password
+const HOST:any = Local.DB_Host
+const DIA:any = Local.DB_Dialect
 
 
 const sequelize = new Sequelize(DB, USER, PASS, {

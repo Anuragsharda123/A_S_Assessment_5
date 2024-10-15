@@ -1,8 +1,9 @@
 // src/middleware/auth.ts
 import {NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { Local } from '../environment/config';
 
-const secret: string = "Anurag123#@!";
+const secret = Local.Secret_Key;
 
 export const authenticateJWT = (req: any, res: any, next: NextFunction) => {
   const token = req.header('Authorization')?.split(' ')[1]; // Bearer token

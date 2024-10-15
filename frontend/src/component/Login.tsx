@@ -9,7 +9,6 @@ var user:any;
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  
   const loginUser = async(loginData: { email: string; password: string; user_type: string }) =>{
     console.log("login Data---------", loginData)
     const response = await axios.post('http://localhost:4000/login', loginData);
