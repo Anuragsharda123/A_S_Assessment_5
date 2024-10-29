@@ -40,18 +40,27 @@ const Dashboard: React.FC = () => {
         );
     }
 
+
     if(token===null){
         navigate("/Login");
     }
 
 
-    console.log("Data:", agency?.data);
+    console.log("Dataaa:", agency?.data);
     const userData = agency?.data;
+
+    if(userData.user.user_type == 2){
+        navigate("/Profile");
+    }
+
     const usergend = userData.user.gender;
     const usergender = usergend === 1 ? "Male" : "Female";
 
     return (
         <>
+        <div>
+            <button className='btn btn-outline-dark' type="button">Logout</button>
+        </div>
             <div className="row">
                 <div className="col-12 d-flex justify-content-end">
                     <button
@@ -111,11 +120,11 @@ const Dashboard: React.FC = () => {
                 </div>
             </div>
         </div>
+        <h2>Job Seekers</h2>
+            <div className="accordion shadow-lg rounded p-5" id="accordionExample">
         {userData.jobseekers.map((jobseeker:any) => (
             <>
-            <div key={jobseeker.id} className="accordion shadow-lg rounded p-5" id="accordionExample">
-                <h2>Job Seekers</h2>
-                <div className="accordion-item">
+                <div key={jobseeker.id} className="accordion-item mb-4">
                     <h2 className="accordion-header">
                     <button className="accordion-button collapsed d-flex" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${jobseeker.id}`} aria-expanded="false" aria-controls={`collapse${jobseeker.id}`}>
                         
@@ -151,16 +160,19 @@ const Dashboard: React.FC = () => {
                                 <div className="mb-3">
                                     <strong>Resume:</strong> <a href={`http://localhost:4000/${jobseeker.resume}`} download target='_blank'> <b> Download Resume </b> </a>
                                 </div>
+                                <div>
+                                    <button className='btn btn-outline-primary px-5' onClick={()=>{
+                                        navigate(`/Chat/${userData.user.id}/${jobseeker.id}`)
+                                    }}>Chat</button>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <br/>
-            <br/>
             </>
         ))}
+        </div>
     </>
     );
 }

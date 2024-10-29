@@ -17,6 +17,12 @@ const addUser = (formData:any) => {
 
 const Signup = () => {
     const navigate = useNavigate()
+    const token = localStorage.getItem("token");
+
+    if(token){
+        navigate("/Profile")
+    }
+
     const { data: agencies } = useQuery({
         queryKey: ['fetchAgencies'],
         queryFn: getAgencies,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
@@ -14,9 +14,11 @@ const UpdatePassword: React.FC = () => {
   const token = localStorage.getItem('token');
   console.log(token)
   
-  if(token===null){
-    navigate("/Login")
-}
+  useEffect(()=>{
+    if(token===null){
+      navigate("/Login")
+  }
+  },[])
 
   
   

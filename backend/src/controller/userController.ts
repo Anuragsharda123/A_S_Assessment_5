@@ -148,11 +148,25 @@ export const getAgencyList = async(req:any, res:Response) => {
     try{
         const agencyList = await User.findAll({where:{ user_type: 1 }});
         res.status(200).json(agencyList);
-    } catch{
-        res.status(500).json({"error":"Something Went Wrong"});
+    } catch(err){
+        res.status(500).json({"error":`Something Went Wrong ${err}`});
     }
 }
 
+export const listUser = async(req:any, res:Response) => {
+    try{
+        const a = await fetch("https://dummyjson.com/products/1", {
+            method: "GET"
+        })
+
+        const  b = await a.json();
+        res.status(200).json({"data":b});
+
+        console.log("Data------>", b)
+    } catch(err) {
+        res.status(200).json({"error":`something went wrong ${err}`})
+    }
+}
 
 
 

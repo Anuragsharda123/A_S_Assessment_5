@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
@@ -9,6 +9,14 @@ var user:any;
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(()=>{
+    if(token){
+        navigate("/Profile")
+    }
+  },[])
+
   const loginUser = async(loginData: { email: string; password: string; user_type: string }) =>{
     console.log("login Data---------", loginData)
     const response = await axios.post('http://localhost:4000/login', loginData);

@@ -53,7 +53,12 @@ const Profile: React.FC = () => {
 
     return (
     <>
-     
+        <div>
+            <button className='btn btn-outline-dark' onClick={()=>{
+                localStorage.clear();
+                navigate("/Login");
+            }} type="button">Logout</button>
+        </div>
         <div className="container mt-5 p-4 bg-light rounded shadow">
             <h2 className="text-center mb-4">Profile</h2>
             <div className="row">
@@ -127,6 +132,11 @@ const Profile: React.FC = () => {
                             </div>
                         </div>
                         </div>
+                <div>
+                    <button className='btn btn-outline-primary px-5 mb-4' onClick={()=>{
+                    navigate(`/Chat/${userData.user.id}/${userData.agency.id}`)
+                    }}>Chat</button>
+                </div>
                     </div>
                 </div>
             </div>
